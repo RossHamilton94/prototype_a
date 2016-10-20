@@ -14,8 +14,8 @@ SceneSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_Fog: 0
-  m_FogColor: {r: .5, g: .5, b: .5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: .463235319, g: .463235319, b: .463235319, a: 1}
   m_FogMode: 3
   m_FogDensity: .00999999978
   m_LinearFogStart: 0
@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: .0469999984, g: .0430000015, b: .0350000001, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e7471c7bc3e48f8408ba34ff15fec1e5, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -36,7 +36,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 1790423689}
 --- !u!127 &3
 LevelGameManager:
   m_ObjectHideFlags: 0
@@ -1044,7 +1044,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400008, guid: 0cd1f9cdef1d00e45a4019e117eef984, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.25
+      value: 13.8900003
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 0cd1f9cdef1d00e45a4019e117eef984, type: 3}
       propertyPath: m_LocalPosition.y
