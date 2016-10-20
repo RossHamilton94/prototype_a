@@ -1,0 +1,117 @@
+fileFormatVersion: 2
+guid: c555485bc78b39641bb628239ad0b483
+timeCreated: 1476961697
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Hemi
+    100004: //RootNode
+    100006: sad_drone
+    100008: sad_drone.001
+    100010: sad_drone.002
+    100012: sad_drone.003
+    100014: sad_drone.004
+    400000: Camera
+    400002: Hemi
+    400004: //RootNode
+    400006: sad_drone
+    400008: sad_drone.001
+    400010: sad_drone.002
+    400012: sad_drone.003
+    400014: sad_drone.004
+    2300000: sad_drone
+    2300002: sad_drone.001
+    2300004: sad_drone.002
+    2300006: sad_drone.003
+    2300008: sad_drone.004
+    3300000: sad_drone
+    3300002: sad_drone.001
+    3300004: sad_drone.002
+    3300006: sad_drone.003
+    3300008: sad_drone.004
+    4300000: sad_drone.004
+    4300002: sad_drone.003
+    4300004: sad_drone.001
+    4300006: sad_drone.002
+    4300008: sad_drone
+    7400000: sad_drone.004|sad_drone.002Action.002
+    7400002: sad_drone.004|sad_drone.002Action.013
+    7400004: sad_drone.004|sad_drone.002Action.014
+    7400006: sad_drone.004|sad_drone.002Action.015
+    7400008: sad_drone.003|sad_drone.002Action.002
+    7400010: sad_drone.003|sad_drone.002Action.013
+    7400012: sad_drone.003|sad_drone.002Action.014
+    7400014: sad_drone.003|sad_drone.002Action.015
+    7400016: sad_drone.001|sad_drone.002Action.002
+    7400018: sad_drone.001|sad_drone.002Action.013
+    7400020: sad_drone.001|sad_drone.002Action.014
+    7400022: sad_drone.001|sad_drone.002Action.015
+    7400024: sad_drone.002|sad_drone.002Action.002
+    7400026: sad_drone.002|sad_drone.002Action.013
+    7400028: sad_drone.002|sad_drone.002Action.014
+    7400030: sad_drone.002|sad_drone.002Action.015
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
