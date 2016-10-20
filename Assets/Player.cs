@@ -25,10 +25,10 @@ public class Player : MonoBehaviour {
 
         // setup player objects
         rb = GetComponent<Rigidbody>();
-        Camera.main.transform.GetComponent<SmoothFollow>().target = this.transform;
+        // Camera.main.transform.GetComponent<SmoothFollow>().target = this.transform;
 
         // setup weapons
-        bullet = Resources.Load("Prefabs/Bullet") as GameObject;
+        bullet = Resources.Load("rocket") as GameObject;
         ammo = base_ammo_count;
     }
 
