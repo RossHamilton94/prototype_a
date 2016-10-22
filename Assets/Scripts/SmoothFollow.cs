@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 
 public class SmoothFollow : MonoBehaviour {
+
     public float smooth = 0.15F;
     private Vector3 velocity = Vector3.zero;
     public float clampxmin = -1.0f;
