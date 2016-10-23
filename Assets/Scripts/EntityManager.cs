@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class EntityManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class EntityManager : MonoBehaviour
     public Transform player_prefab;
     public int current_player_count = 0;    // 0 indexed
 
+    public List<GameObject> players;
     private Vector3[] spawn_points;
 
     // Called when this object is instantiated in the scene
@@ -20,7 +22,8 @@ public class EntityManager : MonoBehaviour
 
         int i = 0;
         spawn_points = new Vector3[spawn_points_list.childCount];
-        for (i = 0; i < spawn_points_list.childCount; i++) {
+        for (i = 0; i < spawn_points_list.childCount; i++)
+        {
             spawn_points[i] = spawn_points_list.GetChild(i).transform.position;
         }
     }
@@ -37,6 +40,12 @@ public class EntityManager : MonoBehaviour
 
     }
 
+    void LateUpdate()
+    {
+        // This will run in the game manager logic loop, check here for deaths/game states/things not tied to the players/physics step
+        Process();
+    }
+
     Vector3 RandomSpawnPoint()
     {
         return spawn_points[UnityEngine.Random.Range(0, spawn_points.Length)];
@@ -47,6 +56,7 @@ public class EntityManager : MonoBehaviour
         GameObject temp_player = Instantiate(player_prefab.gameObject, RandomSpawnPoint(), Quaternion.identity) as GameObject;
         temp_player.transform.parent = entity_container.transform;
         temp_player.GetComponent<PlayerInput>().playerid = current_player_count;
+        players.Add(temp_player);
         current_player_count++;
     }
 
@@ -62,6 +72,28 @@ public class EntityManager : MonoBehaviour
 
     public void Process()
     {
-        throw new NotImplementedException();
+        foreach (GameObject p in players)
+        {
+            PlayerInput temp_p = p.GetComponent<PlayerInput>();
+            BossController temp_b = p.GetComponent<BossController>();
+
+            // If the player we've accessed is a player and not a boss
+            if (temp_p != null)
+            {
+                if (temp_p.health <= 0)
+                {
+                    Application.LoadLevel("Game_Over");     // TODO: User specific win logic, what happens when the players win?
+                }
+            }
+
+            // If the player we'eve accessed is a boss and not a player
+            if (temp_b != null)
+            {
+                if (temp_b.base_health <= 0)
+                {
+                    Application.LoadLevel("Game_Over");     // TODO: User specific win logic, what happens when the boss wins?
+                }
+            }
+        }
     }
 }

@@ -61,9 +61,6 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // This will run in the game manager logic loop, check here for deaths/game states/things not tied to the players/physics step
-        // em.Process();
-
 	}
 
     void SetState(GameState _state)

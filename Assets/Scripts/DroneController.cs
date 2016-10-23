@@ -16,7 +16,7 @@ public class DroneController : EntityController
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        // Camera.main.transform.GetComponent<DualFollowCamera>().player_target = this.transform;
+        Camera.main.transform.GetComponent<SmoothFollow>().target = this.transform;
     }
 
     // Use this for initialization
