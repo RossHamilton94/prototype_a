@@ -12,7 +12,7 @@ GameObject:
   - 54: {fileID: 5446742}
   - 114: {fileID: 11408688}
   - 65: {fileID: 6517048}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rocket
   m_TagString: Rocket
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 4: {fileID: 448812}
   - 33: {fileID: 3320640}
   - 23: {fileID: 2318166}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,9 +42,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184566}
-  m_LocalRotation: {x: -.449179798, y: -.546111226, z: .449179769, w: .546111345}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: -11.1599998, y: -.610000014, z: -.119999997}
-  m_LocalScale: {x: 39.7483826, y: 39.7483788, z: 109.640396}
+  m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children: []
   m_Father: {fileID: 452196}
   m_RootOrder: 0
@@ -54,8 +54,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177438}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: .4251436, y: -1.12930954, z: -1.53097868}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.72799253, y: .870690465, z: .0160940886}
   m_LocalScale: {x: .100000016, y: .200000003, z: .200000033}
   m_Children:
   - {fileID: 448812}
@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 2
   damage: 3
+  endingPoint: {x: 0, y: 0, z: 0}
+  speed: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -177,6 +179,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: lifetime
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

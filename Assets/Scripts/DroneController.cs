@@ -6,7 +6,9 @@ public class DroneController : EntityController
     public float speed = 8.5f;
     public float jump_strength = 5.0f;
     public float bullet_force = 15.0f;
-    
+
+    public Transform bullet_location;
+
     private bool is_jumping = false;
     private bool double_jumped = false;
 
@@ -21,9 +23,14 @@ public class DroneController : EntityController
 
     // Use this for initialization
     void Start()
-    {        
+    {
         // setup weapons
         bullet = Resources.Load("Prefabs/rocket") as GameObject;
+        if (bullet_location == null)
+        {
+            bullet_location.position = transform.position; // If we've not assigned a bullet spawn position, spawn it at the players location
+        }
+
     }
 
     // Update is called once per frame
@@ -107,11 +114,10 @@ public class DroneController : EntityController
     public void FireWeapon()
     {
         //fire bullet object
-        GameObject bullet_fired = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject;
+        GameObject bullet_fired = Instantiate(bullet, bullet_location.position, Quaternion.identity) as GameObject;
         bullet_fired.transform.rotation = Quaternion.Euler(new Vector3(0.0f, facing == 1 ? 0.0f : 180.0f, 0.0f));
         bullet_fired.SetActive(true);
         bullet_fired.GetComponent<Rigidbody>().AddForce(new Vector2(bullet_force * 1.0f * facing, 0.0f), ForceMode.Impulse);
 
-        Physics.IgnoreCollision(bullet_fired.GetComponent<Collider>(), GetComponent<Collider>());
     }
 }

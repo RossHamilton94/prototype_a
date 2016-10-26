@@ -5,6 +5,8 @@ public class Rocket : MonoBehaviour
 {
     public float lifetime = 1.0f;
     public int damage = 3;
+    public Vector3 endingPoint;
+    public float speed = 1;
     
     // Use this for initialization
     void Start()
