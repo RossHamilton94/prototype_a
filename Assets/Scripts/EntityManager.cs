@@ -16,16 +16,7 @@ public class EntityManager : MonoBehaviour
     // Called when this object is instantiated in the scene
     void Awake()
     {
-        if (entity_container == null) Debug.Log("Error: Please attach a container object to store the entities in to this script.");
-        if (spawn_points_list == null) Debug.Log("Error: Please attach a spawn points object to this script.");
-        if (player_prefab == null) Debug.Log("Error: Please attach a player prefab object to this script.");
-
-        int i = 0;
-        spawn_points = new Vector3[spawn_points_list.childCount];
-        for (i = 0; i < spawn_points_list.childCount; i++)
-        {
-            spawn_points[i] = spawn_points_list.GetChild(i).transform.position;
-        }
+        Init();
     }
 
     // Use this for initialization
@@ -44,6 +35,20 @@ public class EntityManager : MonoBehaviour
     {
         // This will run in the game manager logic loop, check here for deaths/game states/things not tied to the players/physics step
         Process();
+    }
+
+    public void Init()
+    {
+        if (entity_container == null) Debug.Log("Error: Please attach a container object to store the entities in to this script.");
+        if (spawn_points_list == null) Debug.Log("Error: Please attach a spawn points object to this script.");
+        if (player_prefab == null) Debug.Log("Error: Please attach a player prefab object to this script.");
+
+        int i = 0;
+        spawn_points = new Vector3[spawn_points_list.childCount];
+        for (i = 0; i < spawn_points_list.childCount; i++)
+        {
+            spawn_points[i] = spawn_points_list.GetChild(i).transform.position;
+        }
     }
 
     Vector3 RandomSpawnPoint()
@@ -72,26 +77,31 @@ public class EntityManager : MonoBehaviour
 
     public void Process()
     {
-        foreach (GameObject p in players)
+        if (GameManager.instance.GetState() == GameManager.GameState.READY)
         {
-            PlayerInput temp_p = p.GetComponent<PlayerInput>();
-            BossController temp_b = p.GetComponent<BossController>();
-
-            // If the player we've accessed is a player and not a boss
-            if (temp_p != null)
+            foreach (GameObject p in players)
             {
-                if (temp_p.health <= 0)
+                PlayerInput temp_p = p.GetComponent<PlayerInput>();
+                BossController temp_b = p.GetComponent<BossController>();
+
+                // If the player we've accessed is a player and not a boss
+                if (temp_p != null)
                 {
-                    Application.LoadLevel("Game_Over");     // TODO: User specific win logic, what happens when the players win?
+                    if (temp_p.health <= 0)
+                    {
+                        GameManager.instance.SetState(GameManager.GameState.GAMEOVER);
+                        Application.LoadLevel("Game_Over");     // TODO: User specific win logic, what happens when the players win?
+                    }
                 }
-            }
 
-            // If the player we'eve accessed is a boss and not a player
-            if (temp_b != null)
-            {
-                if (temp_b.base_health <= 0)
+                // If the player we'eve accessed is a boss and not a player
+                if (temp_b != null)
                 {
-                    Application.LoadLevel("Game_Over");     // TODO: User specific win logic, what happens when the boss wins?
+                    if (temp_b.base_health <= 0)
+                    {
+                        GameManager.instance.SetState(GameManager.GameState.GAMEOVER);
+                        Application.LoadLevel("Game_Over");     // TODO: User specific win logic, what happens when the boss wins?
+                    }
                 }
             }
         }
