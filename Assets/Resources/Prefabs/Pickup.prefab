@@ -85,69 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a6225760ff0bf418900ea8f770df6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: -166376
-  dbg: 0
-  Prefs:
-    _Buckets: ffffffffffffffffffffffffffffffff01000000050000000400000002000000ffffffffffffffff030000000600000007000000ffffffff00000000ffffffffffffffff
-    _HashCodes: 7ba55663fc70c207845d9749288b815d480b6d12885a6f5d2dffec022effec02000000000000000000000000000000000000000000000000000000000000000000000000
-    _Next: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000
-    _Count: 8
-    _Version: 1108
-    _FreeList: -1
-    _FreeCount: 0
-    _Keys: 7ba55663fc70c287845d97c9288b81dd480b6d12885a6fdd2dffec022effec02000000000000000000000000000000000000000000000000000000000000000000000000
-    _Values:
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 10
-      Type: 0
-    - ValueString: 
-      ValueFloat: 1
-      Type: 2
-    - ValueString: 
-      ValueFloat: 1
-      Type: 2
-    - ValueString: 
-      ValueFloat: 1
-      Type: 2
-    - ValueString: 
-      ValueFloat: 1
-      Type: 2
-    - ValueString: 
-      ValueFloat: 14
-      Type: 1
-    - ValueString: 
-      ValueFloat: 444
-      Type: 1
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
-    - ValueString: 
-      ValueFloat: 0
-      Type: 0
   type: 1
   buff:
     effects:
@@ -165,8 +102,40 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: buff.effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_TagString
       value: Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buff.effects.Array.data[1].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buff.effects.Array.data[1].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buff.effects.Array.data[1].duration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buff.effects.Array.data[2].type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buff.effects.Array.data[2].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buff.effects.Array.data[2].duration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ammo.type
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Vexe.Runtime.Types;
 using System;
 using System.Collections.Generic;
 
-public class Pickup : BaseBehaviour
+public class Pickup : MonoBehaviour
 {
 
     [Serializable]
