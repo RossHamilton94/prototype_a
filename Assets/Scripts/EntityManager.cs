@@ -60,7 +60,7 @@ public class EntityManager : MonoBehaviour
     {
         GameObject temp_player = Instantiate(player_prefab.gameObject, RandomSpawnPoint(), Quaternion.identity) as GameObject;
         temp_player.transform.parent = entity_container.transform;
-        temp_player.GetComponent<PlayerInput>().playerid = current_player_count;
+        if (temp_player.GetComponent<PlayerInput>() != null) temp_player.GetComponent<PlayerInput>().playerid = current_player_count;
         players.Add(temp_player);
         current_player_count++;
     }
