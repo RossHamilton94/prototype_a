@@ -67,4 +67,9 @@ public class Objective : MonoBehaviour
     void OnTriggerStay(Collider col)
     {
     }
+
+    public float GetPercentageCharge()
+    {
+        return percentage_bar.fillAmount;
+    }
 }
