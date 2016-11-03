@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class MeatboyController : MonoBehaviour
+public class MeatboyController : Entity
 {
     [Serializable]
     public class GroundState
@@ -79,7 +79,8 @@ public class MeatboyController : MonoBehaviour
             if (left_hi.transform != null)
             {
                 left = true;
-            } else
+            }
+            else
             {
                 left = false;
             }
@@ -87,7 +88,8 @@ public class MeatboyController : MonoBehaviour
             if (right_hi.transform != null)
             {
                 right = true;
-            } else
+            }
+            else
             {
                 right = false;
             }
@@ -104,100 +106,139 @@ public class MeatboyController : MonoBehaviour
         }
     }
 
-    private float speed;
-    private float accel;
-    private float airAccel;
-    private float jump;
-    private float wallPush;
-
-    public float base_speed = 12.0f;
-    public float base_accel = 6.0f;
-    public float base_air_accel = 3.0f;
-    public float base_jump = 8.0f;
-    public float base_wall_push = 2.5f;
+    public float wall_push = 2.5f;
     public float shift_mod_factor = 1.5f;
+    public float mod_factor = 1.0f;
+
+    public float capture_speed = 0.001f;
 
     private Rigidbody rb;
 
     [SerializeField]
     public GroundState groundState;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+    }
+
     void Start()
     {
         // Create an object to check if player is grounded or touching wall
         groundState = new GroundState(transform.gameObject);
         rb = GetComponent<Rigidbody>();
-        speed = base_speed;
-        accel = base_accel;
-        airAccel = base_air_accel;
-        jump = base_jump;
-        wallPush = base_wall_push;
     }
 
     private Vector2 input;
 
     void OnGUI()
     {
-        GUILayout.Label("Grounded: " + groundState.isGround());
-        GUILayout.Label("Touching: " + groundState.isTouching());
-        GUILayout.Label("Wall: " + groundState.isWall());
-        GUILayout.Label("Wall Direction: " + groundState.wallDirection());
+        GUILayout.BeginArea(new Rect(new Vector2(115.0f, 15.0f), new Vector2(125.0f, 150.0f)));
+        GUILayout.TextArea(
+             "Grounded: " + groundState.isGround() + "\n" +
+             "Touching: " + groundState.isTouching() + "\n" +
+             "Wall: " + groundState.isWall() + "\n" +
+             "Wall Direction: " + groundState.wallDirection() + "\n"
+        );
+        GUILayout.EndArea();
     }
 
-    void Update()
+    protected override void Update()
     {
         // Handle input
-        if (Input.GetKey(KeyCode.A)) {
-            input.x = -1;
-        } else if (Input.GetKey(KeyCode.D)) {
-            input.x = 1;
-        } else {
-            input.x = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-            input.y = 1;
-
-        // Speed up
+        if (Input.GetKey(KeyCode.A)) input.x = -1;
+        else if (Input.GetKey(KeyCode.D)) input.x = 1;
+        else input.x = 0;
+        if (Input.GetKeyDown(KeyCode.Space)) input.y = 1;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speed = base_speed * shift_mod_factor;
-            jump = base_jump * shift_mod_factor;
-            airAccel = base_air_accel * shift_mod_factor;
-            accel = base_accel * shift_mod_factor;
+            if (energy - energy_cost >= 0)
+            {
+                StartCoroutine(AttributeTimer(4.0f));
+                energy -= energy_cost;
+            }
+            else
+            {
+                Debug.Log("The player is exhausted, you cannot use them until you regain some energy");
+            }
         }
-
-        // Slow down
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            speed = base_speed;
-            jump = base_jump;
-            airAccel = base_air_accel;
-            accel = base_accel;
+            StopCoroutine("AttributeTimer");
+            mod_factor = 1.0f;
         }
 
-        //Reverse player if going different direction
+        base.Update();
+
+        // Reverse player if going different direction
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, (input.x == 0) ? transform.localEulerAngles.y : (input.x + 1) * 90, transform.localEulerAngles.z);
     }
 
-
+    IEnumerator AttributeTimer(float time)
+    {
+        mod_factor = shift_mod_factor;
+        yield return new WaitForSeconds(time);
+        mod_factor = 1.0f;
+    }
 
     void FixedUpdate()
     {
         GetComponent<Rigidbody>().AddForce(
             new Vector2(
-                ((input.x * speed) - GetComponent<Rigidbody>().velocity.x) * (groundState.isGround() ? accel : airAccel),
+                ((input.x * (speed * mod_factor)) - GetComponent<Rigidbody>().velocity.x) * (groundState.isGround() ? (accel * mod_factor) : (air_accel * mod_factor)),
                 0)); //Move player.
 
         GetComponent<Rigidbody>().velocity
             = new Vector2(
                 (input.x == 0 && groundState.isGround()) ? 0 : GetComponent<Rigidbody>().velocity.x,
-                (input.y == 1 && groundState.isTouching()) ? jump : GetComponent<Rigidbody>().velocity.y); //Stop player if input.x is 0 (and grounded) and jump if input.y is 1
+                (input.y == 1 && groundState.isTouching()) ? (jump * mod_factor) : GetComponent<Rigidbody>().velocity.y); //Stop player if input.x is 0 (and grounded) and jump if input.y is 1
 
         if (groundState.isWall() && !groundState.isGround() && input.y == 1)
             GetComponent<Rigidbody>().velocity = new Vector2(
-                -groundState.wallDirection() * speed * wallPush,
+                -groundState.wallDirection() * (speed * mod_factor) * (wall_push * mod_factor),
                 GetComponent<Rigidbody>().velocity.y); //Add force negative to wall direction (with speed reduction)
 
         input.y = 0;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.transform.tag == "Pickup")
+        {
+            col.GetComponent<Pickup>().Use(this);
+        }
+
+        if (col.transform.tag == "CapturePoint")
+        {
+            // Make sure we reset the co-routines running on this script otherwise they'll overlap and fuck up the fill amount lerp
+            col.gameObject.GetComponent<Objective>().Reset();
+        }
+
+        Debug.Log(col.transform.name);
+    }
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.transform.tag == "CapturePoint")
+        {
+            Debug.Log("i'm inside you (the collider)");
+            col.gameObject.GetComponent<Objective>().active = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.transform.tag == "CapturePoint")
+        {
+            Debug.Log("i pulled out (of the collider)");
+            col.gameObject.GetComponent<Objective>().active = false;
+            // Make sure we reset the co-routines running on this script otherwise they'll overlap and fuck up the fill amount lerp
+            col.gameObject.GetComponent<Objective>().Reset();
+        }
     }
 }

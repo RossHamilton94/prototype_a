@@ -8,6 +8,7 @@ TagManager:
   - Rocket
   - Boss
   - Pickup
+  - CapturePoint
   layers:
   - Default
   - TransparentFX

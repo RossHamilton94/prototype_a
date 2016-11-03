@@ -1,26 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : Entity
 {
     private float move_x = 0.0f;
     private float move_y = 0.0f;
     private DroneController dc;
 
-    public int base_health = 20;
-    public int health = 20;
-    public int base_ammo_count = 30;
-    public int ammo = 0;
-
     public float arcFraction = 0.35f;
     public float time = 1.0f;
 
     bool traveling = false;
-
-    public delegate void DamageAction(int pid, float health, float amount);
-    public static event DamageAction OnDamage;
-
-    public int playerid;
 
     // Use this for initialization
     void Start()
@@ -31,6 +21,8 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        base.Update();
+
         // moving
         move_x = Input.GetAxis("Horizontal");
         move_y = Input.GetAxis("Vertical");
@@ -48,19 +40,9 @@ public class PlayerInput : MonoBehaviour
         }
 
         // Debug health testing
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            int damage = Mathf.RoundToInt(Random.Range(0.0f, 5.0f));
+        base.Update();
 
-            // Update the UI
-            if (OnDamage != null)
-            {
-                OnDamage(playerid, base_health, damage);
-            }
-
-            Damage(damage);
-        }
-
+        // Debug depth switch
         if (Input.GetKeyDown(KeyCode.J))
         {
             Vector3 start = this.transform.position;
@@ -117,21 +99,6 @@ public class PlayerInput : MonoBehaviour
         point += t * t * endPosition;
 
         return point;
-    }
-
-    void Damage(int amount)
-    {
-        if (health - amount <= 0)
-        {
-            // We ded
-            Debug.Log("I am player: " + playerid + " and i just died");
-            health = 0;
-
-        }
-        else
-        {
-            health -= amount;
-        }
     }
 
     void OnTriggerEnter(Collider col)

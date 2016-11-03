@@ -17,7 +17,8 @@ public class Pickup : MonoBehaviour
             FIRE_RATE = 3,
             SHIELDS = 4,
             LIVES = 5,
-            DAMAGE = 6
+            DAMAGE = 6,
+            ENERGY = 7
         }
         public EffectType type;
         public int value;
@@ -104,7 +105,7 @@ public class Pickup : MonoBehaviour
 
     }
 
-    public void Use(PlayerInput playerInput)
+    public void Use(Entity playerInput)
     {
         switch (type)
         {
@@ -126,7 +127,7 @@ public class Pickup : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void CalcBuff(PlayerInput playerInput)
+    void CalcBuff(Entity playerInput)
     {
         foreach (Effect e in buff.effects)
         {
@@ -135,7 +136,8 @@ public class Pickup : MonoBehaviour
                 case Effect.EffectType.NONE:
                     break;
                 case Effect.EffectType.HEALTH:
-                    break;
+                    playerInput.UpdateHealth(e.value);
+                     break;
                 case Effect.EffectType.SPEED:
                     break;
                 case Effect.EffectType.FIRE_RATE:
@@ -146,13 +148,16 @@ public class Pickup : MonoBehaviour
                     break;
                 case Effect.EffectType.DAMAGE:
                     break;
+                case Effect.EffectType.ENERGY:
+                    playerInput.UpdateEnergy(e.value);
+                    break;
                 default:
                     break;
             }
         }
     }
 
-    void CalcAmmo(PlayerInput playerInput)
+    void CalcAmmo(Entity playerInput)
     {
         switch (ammo.type)
         {
