@@ -4,10 +4,11 @@ using System.Collections;
 public class BossController : MonoBehaviour
 {
 
-    public delegate void DamageAction(int pid, float health, float amount);
+    public delegate void DamageAction(int pid, float health, float current_health, float amount);
     public static event DamageAction OnDamage;
 
     public float base_health = 100.0f;
+    public float current_health = 100.0f;
     public float attack_stength = 2.0f;
 
     public int base_shield_amount = 100;
@@ -41,7 +42,7 @@ public class BossController : MonoBehaviour
             base_health -= amount;
             if (OnDamage != null)
             {
-                OnDamage(3, base_health, amount);    // Always 3 because our boss is the 4th player
+                OnDamage(3, base_health, current_health, amount);    // Always 3 because our boss is the 4th player
             }
         }
     }

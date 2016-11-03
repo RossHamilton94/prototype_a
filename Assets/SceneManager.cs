@@ -17,7 +17,15 @@ public class SceneManager : MonoBehaviour
 
     public void LoadLevel(string name)
     {
-        Application.LoadLevel(name);
+        if (NiceSceneTransition.instance != null)
+        {
+            NiceSceneTransition.instance.LoadScene(name);
+  
+            this.gameObject.SetActive(false);
+        } else
+        {
+            Application.LoadLevel(name);
+        }
     }
 
 }
